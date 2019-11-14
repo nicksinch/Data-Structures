@@ -13,7 +13,7 @@ class LinkedQueue
             T Data;
              Box* pNext;
 
-            Box(const T& Data, pNext = nullptr): Data(Data), pNext(pNext){}
+            Box(const T& Data, Box* pNext = nullptr): Data(Data), pNext(pNext){}
     };
 
     private:
@@ -107,14 +107,9 @@ template <typename T>
 void LinkedQueue<T>::Push(const T & Element)
 {
     Box* newValue = new Box(Element);
-    if(isEmpty())
-    {
-        frontElement = newValue;
-    }
-    else{       
-        rearElement->pNext = newValue;
-        rearElement = newValue;
-    }
+    if(isEmpty())frontElement = newValue;
+    else rearElement->pNext = newValue;
+    rearElement = newValue;
 }
 
 template <typename T>
@@ -144,7 +139,6 @@ int main()
     for (size_t i = 0; i < 7; i++)
     {
         std::cout<<People.Front();
+        People.Pop();
     }
-    
-
 }
