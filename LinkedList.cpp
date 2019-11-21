@@ -328,6 +328,19 @@ class List
         //     position.ptr->next = node;
         // }
 
+        void Reverse() // Reverses the order of the elements in the list
+        {
+            Box* prevPtr = nullptr, *nextPtr = nullptr, *currPtr = pFirst;
+            while(currPtr != nullptr)
+            {
+                nextPtr = currPtr->pNext;
+                currPtr->pNext = prevPtr;
+                prevPtr = currPtr;
+                currPtr = nextPtr;
+            }
+            pFirst = prevPtr;
+        }
+
         Iterator GetIterator() const
         {
             return Iterator(pFirst);
@@ -341,11 +354,9 @@ int main()
     {
         RandomInts.PushBack(i);
     }
-    RandomInts.RemoveAt(2);
+    RandomInts.Reverse();
 
-    List<int> CopyInts(RandomInts);
-
-    for (List<int>::Iterator it = CopyInts.GetIterator(); !it.EndReached();it.MoveNext())
+    for (List<int>::Iterator it = RandomInts.GetIterator(); !it.EndReached();it.MoveNext())
     {
         std::cout<<it.GetCurrent()<<std::endl;
     }
