@@ -199,7 +199,18 @@ void InOrderTreeWalkIterative(Node* Root)
 				break;
 		}
 	}
+}
 
+
+bool CheckBST(Node* Root, Node* L = NULL, Node* R = NULL) // Returns true if the tree is a BST, false otherwise
+{
+	if( Root = NULL)
+		return true;
+	if( L != NULL && Root->Key <= L->Key)
+		return false;
+	if( R != NULL && Root->Key >= R->Key)
+		return false;
+	return CheckBST(Root->Left, L, Root) && CheckBST(Root->Right, Root, R);
 }
 
 
