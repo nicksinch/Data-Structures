@@ -1,7 +1,11 @@
 /*
+
     Graph represented by Adjacency List.
+
     Elementary Graph Algorithms - BFS and DFS , implemented simply ( only exploring the graph )
     DFS is implemented both recursively and iteratively unlike BFS, which is, just iteratively.
+
+    Topological sort is also implemented simply just using an additional stack.
 
     In different cpp files there will be added a more complex implementations of both , where :
     BFS can tell us the distance between a vertex and another vertex ( shortest path ) and also
@@ -30,6 +34,9 @@ public:
 
     void DFSVisit(int Start, bool* Visited); // Procedure used in the Recursive implementation
     void DFSRecursive(int StartVertex);
+
+    void TopologicalSortUtil(int V, bool Visited[], stack<int> &Stack); // Helper function for the Topological Sort
+    void TopologicalSort();
 };
 Graph::Graph(int V) // Constructs a Graph with a specific number of vertices
 {
@@ -130,9 +137,62 @@ void Graph::DFSRecursive(int StartVertex)
     delete[] Visited;
 }
 
+void Graph::TopologicalSortUtil(int V, bool *Visited, stack<int> &Stack)
+{
+    // Mark the current node as visited.
+    Visited[V] = true;
+
+    // Recursively call this function for all the vertices adjacent to this vertex (that are not visited yet)
+    vector<int>::iterator i;
+    for (i = Adj[V].begin(); i != Adj[V].end(); ++i)
+        if (!Visited[*i])
+            TopologicalSortUtil(*i, Visited, Stack);
+
+    // Push current vertex to the stack that stores the ordering
+    Stack.push(V);
+}
+
+/*
+   Can be thought of as the kind of sorting you can define without reference to comparison of numbers
+   Topological sorting for DAG is a linear ordering of vertices such that for every directed edge uv,
+   vertex u comes before v in the ordering. ( Not possible if the Graph is not a DAG )
+*/
+void Graph::TopologicalSort() // O(|V| + |E|) Since it is just modified DFS with an additional stack
+{
+    stack<int> Stack;
+
+    // Mark all the vertices as not visited
+    bool *visited = new bool[V];
+    for (int i = 0; i < V; i++)
+        visited[i] = false;
+
+    // Recursively calling the helper function for all of the unvisited vertices in the graph
+    for (int i = 0; i < V; i++)
+        if (!visited[i])
+            TopologicalSortUtil(i, visited, Stack);
+
+    /*
+       Print contents of stack
+
+       Note: The first elements of the ordering should always be all the vertices with in-degree = 0 !
+       In this algorithm, this is guaranteed due to the fact that we always call the function recursively
+       for vertices ( and their adjacent vertices and so on and so on ... ) that have in-degree > 0 and push them
+       in the stack only after when they are finished ( they don't have any adjacent vertices left )
+       so on every iteration ( on every moment ) , the top of the stack cannot have a vertex with in-degree = 0,
+       because we call the function only for those that have in-degree > 0, until the very last moment when there are
+       only vertices with in-degree = 0 left unvisited , then they are pushed in the stack and since it is a stack,
+       they come first in the ordering.
+    */
+    while (!Stack.empty())
+    {
+        cout << Stack.top() << " ";
+        Stack.pop();
+    }
+}
+
 int main()
 {
-    Graph G(9);
+    Graph G(9); // Graph to run BFS and DFS on
 
     G.InsertEdge(1, 4);
     G.InsertEdge(1, 5);
@@ -149,7 +209,19 @@ int main()
     cout<<endl;
 
     cout<<"Running DFS: ";
-    G.DFSIterative(1); // 1 4 5 6 2 7 8 9 3
+    G.DFSRecursive(1); // 1 4 5 6 2 7 8 9 3
     cout<<endl;
+
+
+    Graph TopGraph(6); // A graph to run the Topological sort on
+    TopGraph.InsertEdge(5, 2);
+    TopGraph.InsertEdge(5, 0);
+    TopGraph.InsertEdge(4, 0);
+    TopGraph.InsertEdge(4, 1);
+    TopGraph.InsertEdge(2, 3);
+    TopGraph.InsertEdge(3, 1);
+
+    cout << "Following is a Topological Sort of the given Graph: \n";
+    TopGraph.TopologicalSort();
 
 }
