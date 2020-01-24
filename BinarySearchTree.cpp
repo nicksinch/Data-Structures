@@ -1,4 +1,4 @@
-/* An example implementation of a Binary Tree */
+/* An example implementation of a Binary Search Tree that allows duplicate values. */
 
 #include <iostream>
 #include <stack>
@@ -10,14 +10,17 @@ void Swap(int& FirstValue, int& SecondValue)
 }
 
 
+
 // The structure of the nodes that represent the tree
 struct Node { 
 	Node(int _key) {
 		Key = _key;
+        Count = 1;
 		Left = nullptr;
 		Right = nullptr;
 	}
 	int Key;
+	int Count; // This will be used to store duplicate values in the BST
 	Node* Left;
 	Node* Right;
 };
@@ -50,6 +53,8 @@ Node* TreeMaximum(Node* x) // O(h), h is the height of the tree
 }
 
 
+/* Counts the UNIQUE Nodes in the tree
+ ( if a node is duplicated ( occurs more than once ) , it is only counted once */
 int CountNodes(Node* Root)
 {
 	if (Root == nullptr)
@@ -65,51 +70,58 @@ void AddNode(Node*& Dest, int Key)
 	}
 	else
 	{
+	    if( Key == Dest->Key) // If the value already exists
+        {
+	        ++(Dest->Count); // Increment its count by 1
+	        return;
+        }
 		if (Key > Dest->Key)
 			AddNode(Dest->Right, Key);
-		else if (Key < Dest->Key)
-			AddNode(Dest->Left, Key);
-		else
-			throw "This element exists!";
+		else AddNode(Dest->Left, Key);
 	}
 }
-void DeleteNode(Node*& st, int Key)
+void DeleteNode(Node*& N, int Key)
 {
-	if (st == nullptr)
+	if (N == nullptr) // Base case
 		return;
-	else if (st->Key == Key)
+	else if (N->Key == Key)
 	{
-		if (st->Left == nullptr && st->Right == nullptr) // There are no subtrees
+	    if(N->Count > 1) // If the key is presented more than once
+        {
+	        --(N->Count); // Simply decrement it and exist
+	        return;
+        }
+		if (N->Left == nullptr && N->Right == nullptr) // There are no subtrees
 		{
-			delete st;
-			st == nullptr;
+			delete N;
+            N = nullptr;
 		}
-		else if (st->Left == nullptr) // Only Right subtree
+		else if (N->Left == nullptr) // Only Right subtree
 		{
-			Node* Temp = st->Right;
-			delete st;
-			st = Temp;
+			Node* Temp = N->Right;
+			delete N;
+			N = Temp;
 		}
-		else if (st->Right == nullptr) // Only Left Subtree
+		else if (N->Right == nullptr) // Only Left Subtree
 		{
-			Node* Temp = st->Left;
-			delete st;
-			st = Temp;
+			Node* Temp = N->Left;
+			delete N;
+            N = Temp;
 		}
 		else   // Left and Right Subtrees
 		{
-			Node* Min = FindMinNode(st->Right);//finding the min element from the right subtree
+			Node* Min = TreeMinimum(N->Right);//finding the min element from the right subtree
 
 			//Swapping two elements;
-			Swap(Min->Key, st->Key);
+			Swap(Min->Key, N->Key);
 
-			DeleteNode(st->Right, Key); // we could use it directly the pointer min,but we wouldn't take care of the pointer from the parrent 
+			DeleteNode(N->Right, Key); // we could use it directly the pointer min,but we wouldn't take care of the pointer from the parrent
 		}
 	}
-	else if (Key > st->Key)
-		DeleteNode(st->Right, Key);
+	else if (Key > N->Key)
+		DeleteNode(N->Right, Key);
 	else
-		DeleteNode(st->Left, Key);
+		DeleteNode(N->Left, Key);
 }
 Node* Search(Node* x, int Key) /* Time complexity is, of course, O(h), where h is the height of the tree */
 {
@@ -156,7 +168,7 @@ void InOrderTreeWalk(Node* Root)
 	if (Root != nullptr)
 	{
 		InOrderTreeWalk(Root->Left);
-		std::cout << Root->Key;
+		std::cout << Root->Key<<"("<<Root->Count<<")"<<" ";
 		InOrderTreeWalk(Root->Right);
 	}
 	/* 
@@ -165,7 +177,6 @@ void InOrderTreeWalk(Node* Root)
 		std::cout<< Root->Key;
 		PreOrderTreeWalk(Root->Left);
 		PreOrderTreeWalk(Root->Right);
-
 		Analogically, for Post-Order-Tree-Walk, the function will look like:
 		
 		PostOrderTreeWalk(Root->Left);
@@ -192,7 +203,7 @@ void InOrderTreeWalkIterative(Node* Root)
 			{
 				Current = NodeKeys.top();
 				NodeKeys.pop();
-				std::cout << Current->Key << " ";
+				std::cout << Current->Key << "( " <<Current->Count<<" )"<<" ";
 				Current = Current->Right;
 			}
 			else
@@ -202,7 +213,7 @@ void InOrderTreeWalkIterative(Node* Root)
 }
 
 
-bool CheckBST(Node* Root, Node* L = NULL, Node* R = NULL) // Returns true if the tree is a BST, false otherwise
+bool CheckBSTProperty(Node* Root, Node* L = NULL, Node* R = NULL) // Returns true if the tree is a BST, false otherwise
 {
 	if( Root = NULL)
 		return true;
@@ -210,38 +221,31 @@ bool CheckBST(Node* Root, Node* L = NULL, Node* R = NULL) // Returns true if the
 		return false;
 	if( R != NULL && Root->Key >= R->Key)
 		return false;
-	return CheckBST(Root->Left, L, Root) && CheckBST(Root->Right, Root, R);
-}
-
-
-void PrintNode(Node* Node_)
-{
-	if (Node_ == nullptr)
-		std::cerr << "Node doesn't exist!" << std::endl;
-	else
-		std::cout << "Node with key: " << Node_->Key << std::endl;
+	return CheckBSTProperty(Root->Left, L, Root) && CheckBSTProperty(Root->Right, Root, R);
 }
 
 int main()
 {
-	Node* Root = new Node(6);
-	//AddNode(Root, 3);
-	//AddNode(Root, 6);
-	//AddNode(Root, 99);
-	//AddNode(Root, 4);
-	//AddNode(Root, 2);
-	//AddNode(Root, 70);
-	//AddNode(Root, 100);
-	//std::cout << CountNodes(Root);
-	//DeleteNode(Root, 99);
-	//std::cout << CountNodes(Root);
+	Node* Root = nullptr;
+
+    AddNode(Root, 7);
+    AddNode(Root, 7);
+    AddNode(Root, 15);
+    AddNode(Root, 16);
+    AddNode(Root, 14);
 	AddNode(Root, 5);
 	AddNode(Root, 2);
-	AddNode(Root, 7);
 	AddNode(Root, 8);
-	AddNode(Root, 9);
-	//InOrderTreeWalk(Root);
-	Node* foundNode = IterativeSearch(Root, 8);
-	std::cout << foundNode->Key;
+	AddNode(Root, 7);
+
+	DeleteNode(Root,7);
+    //DeleteNode(Root, 7);
+
+	InOrderTreeWalk(Root);
+
+	std::cout<<std::endl;
+	std::cout<<"Count: "<<CountNodes(Root);
+//	Node* foundNode = IterativeSearch(Root, 8);
+//	std::cout << foundNode->Key;
 	FreeTree(Root);
 }
