@@ -44,6 +44,7 @@ public:
     bool IsCyclic(); // Returns true if the Graph is cyclic , false otherwise
 
     void PrintAllPaths(int S, int D);
+    void FindInDegreeOutDegree(); // Finds the in-degree and the out-degree of every vertex
 
 };
 Graph::Graph(int V) // Constructs a Graph with a specific number of vertices
@@ -293,13 +294,43 @@ void Graph::PrintAllPathsUtil(int u, int d, bool visited[],
     path_index--;
     visited[u] = false;
 }
+void Graph::FindInDegreeOutDegree()
+{
+    vector<int> In;
+    vector<int> Out;
+    In.resize(V);
+    Out.resize(V);
 
+    vector<vector<int>>::iterator It;
+    int i = 0;
+    for(It = Adj.begin();It != Adj.end();++It)
+    {
+        Out[i] = It->size();
+        for (int j = 0; j < It->size(); j++)
+        {
+            // Every vertex that has an incoming
+            // edge from i
+            ++In[(*It)[j]];
+        }
+        ++i;
+    }
+    printf("Vertex\tIn\tOut");
+    std::cout<<endl;
+    for (int k = 0; k < V; k++) {
+        std::cout<<k<<": "<<In[k]<<", "<<Out[k]<<endl;
+        //Uncomment next lines if you want to know the number of isolated vertices in the graph
+        //if(In[k] + Out[k] == 0)
+            //num++;
+    }
+}
 
 int main()
 {
     Graph G(5); // Graph to run BFS and DFS on
-    G.ConstructGraph(6); // Enter Edges (u,v) one by one
-    G.PrintAllPaths(1, 2);
+    G.ConstructGraph(2); // Enter Edges (u,v) one by one
+    G.FindInDegreeOutDegree();
+
+    //G.PrintAllPaths(1, 2);
 
 
     //std::cout<<G.IsCyclic()<<endl;
