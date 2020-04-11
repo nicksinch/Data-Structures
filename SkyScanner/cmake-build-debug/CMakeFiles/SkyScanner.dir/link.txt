@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/SkyScanner.dir/main.cpp.o CMakeFiles/SkyScanner.dir/DCP-Problem-321.cpp.o  -o SkyScanner 

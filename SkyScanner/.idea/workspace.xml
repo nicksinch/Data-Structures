@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="SkyScanner" targetName="SkyScanner" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b016b1b8-f204-44b6-a692-10fcd3c94185" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ProjectId" id="1YkPsM3i3m0MaXDlUGFzwxiPeQq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RunManager">
+    <configuration name="SkyScanner" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SkyScanner" TARGET_NAME="SkyScanner" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SkyScanner" RUN_TARGET_NAME="SkyScanner">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b016b1b8-f204-44b6-a692-10fcd3c94185" name="Default Changelist" comment="" />
+      <created>1583483824296</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583483824296</updated>
+      <workItem from="1583483828416" duration="6942000" />
+      <workItem from="1583609582891" duration="2845000" />
+      <workItem from="1583688802374" duration="6505000" />
+      <workItem from="1583776261520" duration="6612000" />
+      <workItem from="1583859683988" duration="3627000" />
+      <workItem from="1583863893530" duration="2694000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1320" height="136" key="GridCell.Tab.0.bottom" timestamp="1583866591450">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1320" height="136" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1583866591450" />
+    <state width="1320" height="136" key="GridCell.Tab.0.center" timestamp="1583866591449">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1320" height="136" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1583866591449" />
+    <state width="1320" height="136" key="GridCell.Tab.0.left" timestamp="1583866591449">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1320" height="136" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1583866591449" />
+    <state width="1320" height="136" key="GridCell.Tab.0.right" timestamp="1583866591450">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1320" height="136" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1583866591450" />
+    <state width="1320" height="136" key="GridCell.Tab.1.bottom" timestamp="1583866591452">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1320" height="136" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1583866591452" />
+    <state width="1320" height="136" key="GridCell.Tab.1.center" timestamp="1583866591452">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1320" height="136" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1583866591452" />
+    <state width="1320" height="136" key="GridCell.Tab.1.left" timestamp="1583866591451">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1320" height="136" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1583866591451" />
+    <state width="1320" height="136" key="GridCell.Tab.1.right" timestamp="1583866591452">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1320" height="136" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1583866591452" />
+    <state x="345" y="169" key="run.anything.popup" timestamp="1583694494602">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="345" y="169" key="run.anything.popup/0.0.1366.768@0.0.1366.768" timestamp="1583694494602" />
+  </component>
+</project>
